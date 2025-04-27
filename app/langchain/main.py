@@ -90,7 +90,7 @@ async def chat(question_input: Question, files: List[UploadFile] = None):
     
     # Step 3: Insert into vector store
     vector_store = InMemoryVectorStore(embeddings)
-    vector_store.add_documents(all_splits)
+    _ = vector_store.add_documents(documents=all_splits)
 
     # Define the prompt for question-answering
     prompt = custom_rag_prompt
