@@ -53,15 +53,15 @@ async def chat(question_input: Question, files: List[UploadFile] = None):
             # Load PDF content using PyPDFLoader
             loader = PyPDFLoader(
                 temp_file_path,
-                mode="single",
+                mode="paged",
                 pages_delimiter="\n-------THIS IS A CUSTOM END OF PAGE-------\n",
             )
             docs += loader.load()
         
     # Step 2: Split the documents into chunks for easier vectorization
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=400,  # Max size of each chunk
-        chunk_overlap=200,  # Overlap between chunks
+        chunk_size=500,  # Max size of each chunk
+        chunk_overlap=50,  # Overlap between chunks
         add_start_index=True  # Add index at the start of each chunk
     )
     all_splits = text_splitter.split_documents(docs)
@@ -69,16 +69,27 @@ async def chat(question_input: Question, files: List[UploadFile] = None):
     total_documents = len(all_splits)
     third = total_documents // 3
 
-    for i, document in enumerate(all_splits):
-        if i < third:
-            document.metadata["section"] = "beginning"
-        elif i < 2 * third:
-            document.metadata["section"] = "middle"
+    # Step 1: Build helper to assign sections
+    def assign_section(idx: int, total: int) -> str:
+        third = total // 3
+        if idx < third:
+            return "beginning"
+        elif idx < 2 * third:
+            return "middle"
         else:
-            document.metadata["section"] = "end"
-        # Step 3: Add the chunks to the vector store
+            return "end"
+    
+    # Step 2: Add section metadata
+    total_documents = len(all_splits)
+    for idx, document in enumerate(all_splits):
+        document.metadata["section"] = assign_section(idx, total_documents)
+        # Optional: If page number exists in metadata
+        if "page" not in document.metadata:
+            document.metadata["page"] = idx  # fallback page number if missing
+    
+    # Step 3: Insert into vector store
     vector_store = InMemoryVectorStore(embeddings)
-    _ = vector_store.add_documents(documents=all_splits)
+    vector_store.add_documents(all_splits)
 
     # Define the prompt for question-answering
     prompt = custom_rag_prompt
