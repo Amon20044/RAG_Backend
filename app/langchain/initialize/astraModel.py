@@ -1,7 +1,8 @@
 from langchain_astradb import AstraDBVectorStore
 import os
 from app.langchain.initialize.embedModel import embeddings
-
+from dotenv import load_dotenv
+load_dotenv()
 # Config
 ASTRA_ENDPOINT = os.getenv("ASTRA_ENDPOINT")
 ASTRA_TOKEN = os.getenv("ASTRA_TOKEN")
