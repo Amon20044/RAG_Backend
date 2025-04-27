@@ -195,18 +195,6 @@ Server will be running at:
 
 ---
 
-## 🏆 Why This Project?
-
-> **Designed to demonstrate:**  
-> 📖 Document Understanding → 🧠 RAG Pipelines → 🌐 Fullstack Integration → 🚀 Real Production Readiness.
-
-Perfect for recruiters looking for:
-- **Fullstack Developers**
-- **AI Engineers**
-- **Backend API Developers**
-
----
-
 ## 🤝 Acknowledgements
 
 - [LangChain](https://github.com/langchain-ai/langchain)
