@@ -165,6 +165,10 @@ Server will be running at:
 
 ---
 
+---
+![image](https://github.com/user-attachments/assets/0d608b4a-c4f7-47c6-9e8c-3e3713dd46ae)
+---
+
 ## 🧠 Flow Diagram (System Architecture)
 
 ```plaintext
