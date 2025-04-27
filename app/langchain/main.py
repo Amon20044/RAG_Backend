@@ -39,8 +39,9 @@ async def chat(question_input: Question, files: List[UploadFile] = None):
 
     Helpful Answer:"""
     custom_rag_prompt = PromptTemplate.from_template(template)
-    
+    # 2. Prepare to load multiple PDF files
     docs = []
+
     with tempfile.TemporaryDirectory() as temp_dir:
         for file in files:
             # Generate a temporary file path for each file
