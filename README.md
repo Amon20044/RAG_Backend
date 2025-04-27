@@ -1,6 +1,6 @@
 # 🧠 RAG-BOT: Multi-PDF Knowledge Chatbot by Amon
 
-> **Built With**: FastAPI ⚡ | LangChain 🧠 | React.js ⚛️ | Datastax Astra DB 🚀 | Supabase PostgreSQL 🗃️ | Meta-Llama 4 Maverick 17B Model 🦙
+> **Built With**: FastAPI ⚡ | LangChain 🧠 | React.js ⚛️ | Datastax Astra DB 🚀 | Supabase PostgreSQL 🗃️ | Meta-Llama 4 Maverick 17B Model 🦙 | Together AI
 
 ---
 
