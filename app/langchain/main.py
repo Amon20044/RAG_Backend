@@ -29,8 +29,10 @@ class Search(TypedDict):
 async def chat(question_input: Question, files: List[UploadFile] = None):
     # Check if the file is provided
     template = """Use the following pieces of context to answer the question at the end.
-    If you don't know the answer, just say that you don't know, don't try to make up an answer.
-    Use three sentences maximum and keep the answer as concise as possible.
+    If you don't know the answer, try one more time to check the context as u can also make mistake.
+    try one more time as you are the best Reader and Writer that is servicing to human in any form of task.
+    you are best in calculating and writing the answer outcomes.
+    you are the worlds best assistant and try to give the best answer.
     Always say "thanks for asking!" at the end of the answer.
 
     {context}
