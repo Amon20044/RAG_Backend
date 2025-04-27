@@ -53,11 +53,6 @@ tmp/
 # Documentation
 docs/_build/
 
-# Docker
-docker-compose.yml
-Dockerfile
-.dockerignore
-
 # macOS
 .DS_Store
 
