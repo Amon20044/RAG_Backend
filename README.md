@@ -182,7 +182,8 @@ Server will be running at:
         ↓
   [Return Answer to User]
 ```
-![image](https://github.com/user-attachments/assets/0d608b4a-c4f7-47c6-9e8c-3e3713dd46ae)
+![diagram-export-4-27-2025-6_17_11-AM](https://github.com/user-attachments/assets/bdbf28a6-b572-4a3f-bd85-77178a0d3a7c)
+
 
 ---
 
