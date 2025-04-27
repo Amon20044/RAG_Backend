@@ -56,7 +56,7 @@ async def chat(question_input: Question, files: List[UploadFile] = None):
             # Load PDF content using PyPDFLoader
             loader = PyPDFLoader(
                 temp_file_path,
-                mode="paged",
+                mode="page",
                 pages_delimiter="\n-------THIS IS A CUSTOM END OF PAGE-------\n",
             )
             docs += loader.load()
