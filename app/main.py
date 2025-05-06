@@ -3,14 +3,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.routes.chatRoute import chat_router  # Correct import
 from dotenv import load_dotenv
 import os
-from app.db.db import supabase
 import uvicorn
 
 load_dotenv()
 
 app = FastAPI()
-
-Supabase = supabase
 
 app.add_middleware(
     CORSMiddleware,

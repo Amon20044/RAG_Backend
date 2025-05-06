@@ -4,7 +4,6 @@ from langgraph.graph import START, StateGraph
 from typing_extensions import List, TypedDict
 from app.langchain.initialize.chatModel import llm
 from app.langchain.initialize.embedModel import embeddings
-from app.langchain.initialize.astraModel import get_vector_store_for_chat
 from fastapi import UploadFile
 from langchain_community.document_loaders import PyPDFLoader
 from app.classes.Classes import Question, Answer
