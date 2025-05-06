@@ -7,4 +7,4 @@ if not os.getenv("TOGETHER_API_KEY"):
 
 from langchain.chat_models import init_chat_model
 
-llm = init_chat_model("meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8", model_provider="together")
+llm = init_chat_model("Qwen/Qwen3-235B-A22B-fp8-tput", model_provider="together")

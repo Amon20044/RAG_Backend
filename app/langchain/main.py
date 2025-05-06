@@ -32,6 +32,7 @@ async def chat(question_input: Question, files: List[UploadFile] = None):
     try one more time as you are the best Reader and Writer that is servicing to human in any form of task.
     you are best in calculating and writing the answer outcomes.
     you are the worlds best assistant and try to give the best answer.
+    you just need to read the context and write the answer according to the question.
     Always say "thanks for asking!" at the end of the answer.
 
     {context}
@@ -104,17 +105,14 @@ async def chat(question_input: Question, files: List[UploadFile] = None):
         
     def analyze_query(state: State):
         structured_llm = llm.with_structured_output(Search)
+        print("Question:", state["question"])
         query = structured_llm.invoke(state["question"])
-        print("Structured query:", query)
+        print("Structured query2 :", query)
         return {"query": query}
     
     # Define application steps for retrieve and generate
     def retrieve(state: State):
-        query = state["query"]
-        retrieved_docs = vector_store.similarity_search(
-            query["query"],
-            filter=lambda doc: doc.metadata.get("section") == query["section"],
-        )
+        retrieved_docs = vector_store.similarity_search(state["question"])
         return {"context": retrieved_docs}
 
     def generate(state: State):
@@ -123,17 +121,10 @@ async def chat(question_input: Question, files: List[UploadFile] = None):
         response = llm.invoke(messages)
         return {"answer": response.content}
     
-    
     # Compile the graph with retrieve and generate steps
-    graph_builder = StateGraph(State).add_sequence([analyze_query, retrieve, generate])
-    graph_builder.add_edge(START, "analyze_query")
+    graph_builder = StateGraph(State).add_sequence([retrieve, generate])
+    graph_builder.add_edge(START, "retrieve")
     graph = graph_builder.compile()
-    
-    for step in graph.stream(
-        {"question": "What does the end of the post say about Task Decomposition?"},
-        stream_mode="updates",
-    ):
-        print(f"{step}\n\n----------------\n")
     result = graph.invoke({"question": question_input.question})
     final_answer = result["answer"]
 
