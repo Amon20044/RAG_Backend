@@ -40,7 +40,10 @@ async def chat(question_input: Question, files: List[UploadFile] = None):
     Question: {question}
 
     Helpful Answer:"""
-    custom_rag_prompt = PromptTemplate.from_template(template)
+    custom_rag_prompt = PromptTemplate(
+        input_variables=["context", "question"],
+        template=template
+    )
     # 2. Prepare to load multiple PDF files
     docs = []
 
@@ -69,27 +72,6 @@ async def chat(question_input: Question, files: List[UploadFile] = None):
     )
     all_splits = text_splitter.split_documents(docs)
 
-    total_documents = len(all_splits)
-    third = total_documents // 3
-
-    # Step 1: Build helper to assign sections
-    def assign_section(idx: int, total: int) -> str:
-        third = total // 3
-        if idx < third:
-            return "beginning"
-        elif idx < 2 * third:
-            return "middle"
-        else:
-            return "end"
-    
-    # Step 2: Add section metadata
-    total_documents = len(all_splits)
-    for idx, document in enumerate(all_splits):
-        document.metadata["section"] = assign_section(idx, total_documents)
-        # Optional: If page number exists in metadata
-        if "page" not in document.metadata:
-            document.metadata["page"] = idx  # fallback page number if missing
-    
     # Step 3: Insert into vector store
     vector_store = InMemoryVectorStore(embeddings)
     _ = vector_store.add_documents(documents=all_splits)
