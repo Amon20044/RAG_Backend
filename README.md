@@ -11,7 +11,6 @@ RAG-BOT is an advanced **Retrieval Augmented Generation (RAG)** chatbot that all
 It is **full-stack**, **scalable**, **vector-database driven**, and **ready for production**!
 
 ---
-
 ## 🛠 Tech Stack
 
 | Layer | Technology |
