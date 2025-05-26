@@ -6,7 +6,6 @@ import os
 import uvicorn
 
 load_dotenv()
-
 app = FastAPI()
 
 app.add_middleware(
